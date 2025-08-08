@@ -20,6 +20,7 @@ let input = document.createElement('input');
 input.setAttribute('type', 'text');
 input.setAttribute('placeholder', 'Your number');
 input.className = 'input';
+input.inputMode = 'numeric';
 
 let button = document.createElement('button');
 button.innerHTML = 'Submit';
@@ -170,4 +171,5 @@ formElement.addEventListener('submit', (e) => {
     showInfoPreviousGuesses(textInput);
     inputText.value = '';
   }
+
 });
