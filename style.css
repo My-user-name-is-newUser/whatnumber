@@ -179,16 +179,23 @@ body{
   }
 
   .form input {
-    width: 100px;
+    width: 106px;
+    font-size: 12px;
   }
 
   .form button {
     width: 70px;
+    font-size: 10px;
   }
 
   .answer div {
     font-size: 15px;
   }
 
+  .playAgain {
+    font-size: 16px;
+  }
+
 }
+
 
