@@ -2,7 +2,7 @@ let divContainer = document.createElement('div');
 divContainer.className = 'container';
 
 let h1Title = document.createElement('h1');
-h1Title.innerHTML = 'What Number?';
+h1Title.innerHTML = 'Угадайте число?';
 h1Title.className = 'title';
 
 let gift = document.createElement('div');
@@ -10,7 +10,7 @@ gift.className = 'gift';
 gift.innerHTML = '<i class="fa-solid fa-gift"></i>';
 
 let spanText = document.createElement('span');
-spanText.innerHTML = 'Could you guess a secret number? Pay attention, you have only 7 attempts. Good luck :)';
+spanText.innerHTML = 'Секретным числом может быть любое число от 0 до 100. У вас 7 попыток. Удачи :)';
 spanText.className = 'span';
 
 let form = document.createElement('form');
@@ -18,12 +18,12 @@ form.className = 'form';
 
 let input = document.createElement('input');
 input.setAttribute('type', 'text');
-input.setAttribute('placeholder', 'Your number');
+input.setAttribute('placeholder', 'Введите число');
 input.className = 'input';
 input.inputMode = 'numeric';
 
 let button = document.createElement('button');
-button.innerHTML = 'Submit';
+button.innerHTML = 'Отгадать';
 button.setAttribute('type', 'submit');
 button.className = 'button';
 form.append(input, button);
@@ -61,7 +61,7 @@ function showInfoSmallOrBig(value) {
 
 function showInfoPreviousGuesses(value) {
   if (attempts === 1) {
-    guesses.textContent = 'Previous guesses: ';
+    guesses.textContent = 'Ваши попытки: ';
   }
   guesses.textContent += ` ${value}`;
 };
@@ -73,8 +73,10 @@ function resetGame(element) {
   guesses.textContent = '';
   winOrLoss.innerHTML = '';
   inputquery.disabled = false;
+  inputquery.style.pointerEvents = '';
   inputquery.focus();
   buttonquery.disabled = false;
+  buttonquery.style.pointerEvents = '';
   giftIcon.style.display = 'flex';
   element.remove();
 };
@@ -102,12 +104,14 @@ function showInfoWinOrLoss(value, attemptsMany) {
   winOrLoss.innerHTML = `${value}`;
   smallOrBig.innerHTML = '';
   inputquery.disabled = true;
+  inputquery.style.pointerEvents = 'none';
   buttonquery.disabled = true;
+  buttonquery.style.pointerEvents = 'none';
   giftIcon.style.display = 'none';
 
   const divWannaPlayAgain = document.createElement('div')
   divWannaPlayAgain.className = 'playAgain';
-  divWannaPlayAgain.innerText = 'Wanna play again?';
+  divWannaPlayAgain.innerText = 'Сыграть снова';
   document.body.append(divWannaPlayAgain);
 
   const playAgain = document.querySelector('.playAgain');
@@ -131,7 +135,7 @@ giftIcon.addEventListener('click', () => {
 function showError() {
   const error = document.createElement('div');
   error.classList.add('error');
-  error.textContent = 'Input only numbers';
+  error.textContent = 'Вводите только числа';
   form.append(error);
 
   setTimeout(() => {
@@ -150,24 +154,24 @@ formElement.addEventListener('submit', (e) => {
   }
 
   if (+textInput === randomNumber) {
-    showInfoWinOrLoss(`You are right! It is <b>${textInput}</b>. Congratulations <i class="fa-solid fa-cake-candles"></i>`, attempts);
+    showInfoWinOrLoss(`Вы угадали! Это <b>${textInput}</b> Вы заслужили тортик <i class="fa-solid fa-cake-candles"></i>`, attempts);
     showInfoPreviousGuesses(textInput);
     inputText.value = '';
   } else if (textInput !== randomNumber && attempts !== 7) {
     if (textInput > randomNumber) {
       const word = 'bigger';
-      showInfoSmallOrBig(`Your number is <b>bigger</b> than secret number.`);
+      showInfoSmallOrBig(`Ваше число <b>больше</b> чем секретное число.`);
       showInfoPreviousGuesses(textInput);
       inputText.value = '';
       attempts++;
     } else if (textInput < randomNumber) {
-      showInfoSmallOrBig(`Your number is <b>smaller</b> than secret number.`);
+      showInfoSmallOrBig(`Ваше число <b>меньше</b> чем секретное число.`);
       showInfoPreviousGuesses(textInput);
       inputText.value = '';
       attempts++;
     }
   } else {
-    showInfoWinOrLoss(`Game over! The number was <b>${randomNumber}</b>. Do not worry. That is okay.`);
+    showInfoWinOrLoss(`Вы проиграли. Секретное число <b>${randomNumber}</b> Ничего страшного:)`);
     showInfoPreviousGuesses(textInput);
     inputText.value = '';
   }
