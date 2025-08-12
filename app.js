@@ -10,7 +10,7 @@ gift.className = 'gift';
 gift.innerHTML = '<i class="fa-solid fa-gift"></i>';
 
 let spanText = document.createElement('span');
-spanText.innerHTML = 'Секретным числом может быть любое число от 0 до 100. У вас 7 попыток. Удачи :)';
+spanText.innerHTML = 'Секретным числом может быть любое целое число от 0 до 100. У вас 7 попыток. Удачи :)';
 spanText.className = 'span';
 
 let form = document.createElement('form');
@@ -177,3 +177,4 @@ formElement.addEventListener('submit', (e) => {
   }
 
 });
+
